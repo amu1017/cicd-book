@@ -4,10 +4,12 @@ on:
     inputs:
       log-level: # 入力パラメータ名
         type: choice # データ型（文字列）
-          options:
-            - info
-            - warn
-            - error
+        options:
+          - info
+          - warn
+          - error
+        description: "choise"
+
 jobs:
   run:
     runs-on: ubuntu-latest
