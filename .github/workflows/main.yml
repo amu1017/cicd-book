@@ -1,8 +1,9 @@
-name: Conditions workflow
+name: Naming
 on: push
 jobs:
-  skip-or-run:
-    if: ${{ github.actor == 'amu1017' }} # octocatアカウント以外は実行をスキップ
+  print:
+    name: Super Useful Job # ジョブ名の指定
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello"
+      - name: Amazing Script # ステップ名の指定
+        run: echo "Hello"
