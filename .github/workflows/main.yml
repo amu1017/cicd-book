@@ -1,14 +1,13 @@
-name: Comment
-on: pull_request
+name: Test
+on:
+  pull_request: # プルリクエストが作成されたら起動
+    paths: ["go/**/*.go"] # ただしGoのファイル変更時のみ
 jobs:
-  comment:
+  test:
     runs-on: ubuntu-latest
-    permissions: # GITHUB_TOKENの権限を指定
-      pull-requests: write # プルリクエストの書き込みを許可
-      contents: read # ソースコードの読み込みを許可
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "${GITHUB_HEAD_REF}"
-      - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub CLI用クレデンシャル
+      - uses: actions/checkout@v4 # ステップ1: チェックアウト
+      - uses: actions/setup-go@v5 # ステップ2: 言語セットアップ
+        with:
+          go-version: "1.22"
+      - run: go test go/excellent/*.go # ステップ3: テストの実行
